@@ -1,24 +1,18 @@
-# Mathgame
+# MathGame
 
-TODO: Write a gem description
+A small command line math game to improve one's arithmetical skills
 
-## Installation
+Still in alpha development
 
-Add this line to your application's Gemfile:
+## Installation & Usage
 
-    gem 'mathgame'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Install it yourself as:
 
     $ gem install mathgame
 
-## Usage
+And run it via
 
-TODO: Write usage instructions here
+    $ mathgame
 
 ## Contributing
 
