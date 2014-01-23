@@ -7,7 +7,7 @@ class Constant < Operator
     @number.to_s
   end
   def self.precedence
-    0
+    100
   end
   def self.associative
     true

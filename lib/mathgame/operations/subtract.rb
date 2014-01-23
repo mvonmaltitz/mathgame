@@ -1,19 +1,16 @@
 require 'mathgame/operations/operator'
-class Add < Operator
+class Subtract < Operator
   def initialize(left, right)
     @left = left
     @right = right
   end
   def operator_string
-    "+"
+    "-"
   end
   def self.precedence
-    0
-  end
-  def self.associative
-    true
+    Add.precedence
   end
   def result
-    @left.result + @right.result
+    @left.result - @right.result
   end
 end
