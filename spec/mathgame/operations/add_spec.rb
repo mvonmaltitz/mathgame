@@ -6,7 +6,7 @@ describe Add  do
     let(:add){Add.new(two,three)}
     describe "#to_s" do
       it "shows a correct string representation of x + y" do
-        expect(add.to_s).to eq "2 + 3"
+        expect(subject.to_s).to eq "2 + 3"
       end
     end
     it_behaves_like "a correct calculator", 5
@@ -15,7 +15,7 @@ describe Add  do
     let(:add){Add.new(Add.new(four,five),three)}
     describe "#to_s" do
       it "shows a correct string representation of x + y + z" do
-        expect(add.to_s).to eq "4 + 5 + 3"
+        expect(subject.to_s).to eq "4 + 5 + 3"
       end
     end
     it_behaves_like "a correct calculator", 12
@@ -24,7 +24,7 @@ describe Add  do
     let(:add){Add.new(Add.new(four,five),Add.new(one,two))}
     describe "#to_s" do
       it "shows a correct string representation of w + x + y + z" do
-        expect(add.to_s).to eq "4 + 5 + 1 + 2"
+        expect(subject.to_s).to eq "4 + 5 + 1 + 2"
       end
     end
     it_behaves_like "a correct calculator", 12
@@ -33,7 +33,7 @@ describe Add  do
     let(:add){Add.new(Subtract.new(four,five),Add.new(one,two))}
     describe "#to_s" do
       it "shows a correct string representation of w - x + y + z" do
-        expect(add.to_s).to eq "4 - 5 + 1 + 2"
+        expect(subject.to_s).to eq "4 - 5 + 1 + 2"
       end
     end
     it_behaves_like "a correct calculator", 2
@@ -42,7 +42,7 @@ describe Add  do
     let(:add){Add.new(Subtract.new(four,five),Subtract.new(one,two))}
     describe "#to_s" do
       it "shows a correct string representation of w - x + y - z" do
-        expect(add.to_s).to eq "4 - 5 + 1 - 2"
+        expect(subject.to_s).to eq "4 - 5 + 1 - 2"
       end
     end
     it_behaves_like "a correct calculator", -2
