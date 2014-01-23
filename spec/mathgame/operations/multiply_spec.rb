@@ -27,4 +27,9 @@ describe Multiply  do
     it_behaves_like "correct string output", "(4 - 5) * (1 - 2)"
     it_behaves_like "a correct calculator", 1
   end
+  context "when using a add operator in the middle" do
+    let(:multiply){Multiply.new(Multiply.new(three, Add.new(four,five)), four)}
+    it_behaves_like "correct string output", "3 * (4 + 5) * 4"
+    it_behaves_like "a correct calculator", 108
+  end
 end

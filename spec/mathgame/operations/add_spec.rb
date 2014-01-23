@@ -32,4 +32,9 @@ describe Add  do
     it_behaves_like "correct string output", "4 - 5 + 1 - 2"
     it_behaves_like "a correct calculator", -2
   end
+  context "when using multiply objects on the left and on the right side" do
+    let(:add){Add.new(Multiply.new(four,five), Multiply.new(one,two))}
+    it_behaves_like "correct string output", "4 * 5 + 1 * 2"
+    it_behaves_like "a correct calculator", 22
+  end
 end
