@@ -13,6 +13,6 @@ end
 
 shared_examples_for "a correct calculator" do |result|
   it "returns the correct result" do
-    expect(subject.result).to eq result
+    expect(subject.result).to be_within(0.01).of result
   end
 end
