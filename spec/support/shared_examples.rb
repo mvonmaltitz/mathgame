@@ -5,6 +5,12 @@ shared_context "constant numbers" do
   let(:four){ Constant.new(4) }
   let(:five){ Constant.new(5) }
 end
+shared_examples_for "correct string output" do |output|
+  it "shows a correct string representation of #{output}" do
+    expect(subject.to_s).to eq output
+  end
+end
+
 shared_examples_for "a correct calculator" do |result|
   it "returns the correct result" do
     expect(subject.result).to eq result
