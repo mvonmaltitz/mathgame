@@ -5,6 +5,7 @@ require "mathgame/operations/add"
 require "mathgame/operations/subtract"
 require "mathgame/operations/multiply"
 require "mathgame/operations/divide"
+require "mathgame/formula_generator"
 
 module Mathgame
   # Your code goes here...
