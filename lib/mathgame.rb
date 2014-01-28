@@ -7,6 +7,7 @@ require "mathgame/operations/divide"
 require "mathgame/formula_generator"
 require "mathgame/value_generator"
 require "mathgame/sliding_window_average"
+require "mathgame/ui"
 
 module Mathgame
   # Your code goes here...
