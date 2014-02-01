@@ -1,5 +1,6 @@
 class UI
-  def initialize(input, output)
+  CLEAR_SCREEN_COMMAND =  "\e[H\e[2J"
+  def initialize(input = STDIN, output = STDOUT)
     @input = input
     @output = output
   end
@@ -10,6 +11,6 @@ class UI
     @input.gets.chomp
   end
   def clear_screen
-    @output.puts "\e[H\e[2J"
+    @output.puts CLEAR_SCREEN_COMMAND
   end
 end
