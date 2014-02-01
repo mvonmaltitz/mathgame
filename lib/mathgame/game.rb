@@ -1,11 +1,12 @@
+require "erb"
 class Game
   DEFAULT_OPERATORS = [Add, Subtract, Multiply, Divide]
   DEFAULT_OPERANDS = [Constant]
 
-  def initialize(ui, formulas = nil, performance_measure = SlidingWindowAverage.new(10) )
+  def initialize(ui = UI.new, formulas = nil, performance_measure = SlidingWindowAverage.new(10) )
     @ui = ui
     rand = Random.new
-    @formulas = formulas || FormulaGenerator.new(1, DEFAULT_OPERATORS, DEFAULT_OPERATORS, ValueGenerator.new(1,2, rand), rand)
+    @formulas = formulas || FormulaGenerator.new(1, DEFAULT_OPERATORS, DEFAULT_OPERANDS, ValueGenerator.new(1,2, rand), rand)
     @performance_measure = performance_measure
   end
 
@@ -14,6 +15,7 @@ class Game
     begin
       @formula = @formulas.tree
       @success_rate = @performance_measure.avg
+      @overall_success_rate = @performance_measure.overall_avg
       @ui.clear_screen
       @ui.write_message(template.result(get_binding()))
       @answer = @ui.get_answer
@@ -31,7 +33,7 @@ class Game
   private
   def calibrate_difficulty
     if @success_rate> 0.90
-      @formulas.increase_value_complexity
+      @formulas.increase_formula_complexity
     end
     if @success_rate> 0.75
       @formulas.increase_value_complexity
@@ -41,7 +43,7 @@ class Game
       @formulas.decrease_value_complexity
     end
     if @success_rate < 0.20
-      @formulas.decrease_value_complexity
+      @formulas.decrease_formula_complexity
     end
   end
 

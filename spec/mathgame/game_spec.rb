@@ -23,9 +23,7 @@ describe Game do
     expect{Game.new(ui)}.not_to raise_exception
   end
   it "be instantiated with defaults" do
-    pending "define stdin and stdout" do
       expect{Game.new}.not_to raise_exception
-    end
   end
   describe "when starting the game" do
     let(:answer){ ["\n"]}
@@ -34,6 +32,9 @@ describe Game do
     end
     it_behaves_like "showing the banner"
     it_behaves_like "showing a success rate of",  "-"
+    it "does not 'incorrect'" do
+      expect(output_array).not_to have_output /was incorrect/
+    end
     it "shows a formula to solve" do
       expect(output_array).to have_output /# 1 \+ 1 =/
     end
