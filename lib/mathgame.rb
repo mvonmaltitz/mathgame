@@ -8,7 +8,13 @@ require "mathgame/formula_generator"
 require "mathgame/value_generator"
 require "mathgame/sliding_window_average"
 require "mathgame/ui"
+require "mathgame/game"
 
 module Mathgame
-  # Your code goes here...
+  class App
+    def start
+      game = Game.new
+      game.start
+    end
+  end
 end
