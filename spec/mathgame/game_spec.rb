@@ -1,29 +1,4 @@
 require "spec_helper"
-shared_examples_for "showing the banner" do
-  it "shows '## Mathgame ##'" do
-    expect(output_array).to have_output /## Mathgame ##/
-  end
-end
-shared_examples_for "showing a success rate of" do |percentage|
-  it "shows 'success rate: #{percentage}'" do
-    expect(output_array).to have_output /success rate: #{percentage}/
-  end
-end
-shared_examples_for "showing a positive feedback to the last answer" do
-  specify{expect(output_array).to have_output /Correct!/}
-end
-shared_examples_for "showing a negative feedback to the last answer" do |answer, result|
-  specify{expect(output_array).to have_output /#{answer} was incorrect, #{result} would have been correct/}
-end
-
-shared_examples_for "deleting the previous output" do
-  it "clearing the screen" do
-    pending "look up how to escape in regex" do
-      output_array.pop
-      expect(output_array).to have_output /#{UI::CLEAR_SCREEN_COMMAND}/
-    end
-  end
-end
 describe Game do
   let(:formulas) { double() }
   let(:output_array){ Array.new }
@@ -71,7 +46,7 @@ describe Game do
         @game.start
       end
       it_behaves_like "showing the banner"
-      it_behaves_like "showing a success rate of",  "100.0%"
+      it_behaves_like "showing a success rate of",  "100.0%", "100.0%"
       it_behaves_like "showing a positive feedback to the last answer"
       it_behaves_like "deleting the previous output"
     end
@@ -82,19 +57,19 @@ describe Game do
         @game.start
       end
       it_behaves_like "showing the banner"
-      it_behaves_like "showing a success rate of",  "0.0%"
+      it_behaves_like "showing a success rate of",  "0.0%", "0.0%"
       it_behaves_like "showing a negative feedback to the last answer", 3, 2
       it_behaves_like "deleting the previous output"
     end
     context "playing some more steps" do
-      let(:answer){["2\n","3\n","2\n", "3\n", "3\n", "\n"]}
+      let(:answer){["2\n","3\n","2\n", "3\n", "3\n","2\n","3\n","2\n", "3\n", "3\n","3\n","2\n", "3\n", "3\n", "\n"]}
       before do
         formulas.should_receive(:increase_value_complexity).twice
-
+        formulas.should_receive(:decrease_value_complexity).exactly(3)
         @game.start
       end
       it_behaves_like "showing the banner"
-      it_behaves_like "showing a success rate of",  "40.0%"
+      it_behaves_like "showing a success rate of",  "30.0%", "35.714285714285715%"
       it_behaves_like "showing a negative feedback to the last answer", 3, 2
       it_behaves_like "deleting the previous output"
     end

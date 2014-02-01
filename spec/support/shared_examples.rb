@@ -16,3 +16,33 @@ shared_examples_for "a correct calculator" do |result|
     expect(subject.result).to be_within(0.01).of result
   end
 end
+shared_examples_for "showing the banner" do
+  it "shows '## Mathgame ##'" do
+    expect(output_array).to have_output /## Mathgame ##/
+  end
+end
+shared_examples_for "showing a success rate of" do |percentage, overall_percentage|
+  it "shows 'success rate: #{percentage}'" do
+    expect(output_array).to have_output /success rate: #{percentage}/
+  end
+  it "shows '(overall: #{overall_percentage})'" do
+    if overall_percentage
+      expect(output_array).to have_output /\(overall: #{overall_percentage}\)/
+    end
+  end
+end
+shared_examples_for "showing a positive feedback to the last answer" do
+  specify{expect(output_array).to have_output /Correct!/}
+end
+shared_examples_for "showing a negative feedback to the last answer" do |answer, result|
+  specify{expect(output_array).to have_output /#{answer} was incorrect, #{result} would have been correct/}
+end
+
+shared_examples_for "deleting the previous output" do
+  it "clearing the screen" do
+    pending "look up how to escape in regex" do
+      output_array.pop
+      expect(output_array).to have_output /#{UI::CLEAR_SCREEN_COMMAND}/
+    end
+  end
+end
