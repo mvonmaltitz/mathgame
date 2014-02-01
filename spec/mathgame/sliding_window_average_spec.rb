@@ -64,14 +64,19 @@ describe SlidingWindowAverage do
       end
       it "leads to 90%" do
         expect(subject.avg).to eq 0.9
+        expect(subject.overall_avg).to eq limit.to_f/(limit+1)
       end
       describe "when adding more misses" do
         it "degrades the avg by 10% each" do
           result = 9
+          sum = limit
+          count = limit + 1
           9.times do
             subject.miss
             result -= 1
+            count += 1
             expect(subject.avg).to eq result.to_f/10
+            expect(subject.overall_avg).to eq sum.to_f / count
           end
         end
       end
