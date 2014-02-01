@@ -19,9 +19,17 @@ class FormulaGenerator
   def inc_height
     @height += 1
   end
+  alias :increase_formula_complexity :inc_height
   def dec_height
     @height -= 1
     @height = 0 if @height < 0
+  end
+  alias :decrease_formula_complexity :dec_height
+  def decrease_value_complexity
+    @value_generator.decrease_complexity
+  end
+  def increase_value_complexity
+    @value_generator.increase_complexity
   end
   private
   def pick(array)

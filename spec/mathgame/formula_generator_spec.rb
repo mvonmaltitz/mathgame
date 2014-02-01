@@ -48,6 +48,18 @@ describe FormulaGenerator do
           end
         end
       end
+      describe "when increasing the value complexity" do
+        it "passes the call to the value generator" do
+          value_generator.should_receive(:increase_complexity)
+          generator.increase_value_complexity
+        end
+      end
+      describe "when decreasing the value complexity" do
+        it "passes the call to the value generator" do
+          value_generator.should_receive(:decrease_complexity)
+          generator.decrease_value_complexity
+        end
+      end
     end
     describe "when initializing with real operators" do
       let(:rand){ Random.new(1) }

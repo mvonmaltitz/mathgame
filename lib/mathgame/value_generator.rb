@@ -23,6 +23,8 @@ class ValueGenerator
     @upper_limit -= 1
     @upper_limit = @lower_limit if limits_invalid
   end
+  alias :decrease_complexity :dec_upper
+  alias :increase_complexity :inc_upper
   private
   def limits_invalid
      @lower_limit > @upper_limit
